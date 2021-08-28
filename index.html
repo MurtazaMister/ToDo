@@ -4,50 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo list</title>
-    <style>
-        body{
-            margin: 0;
-            padding: 0;
-        }
-        .nav{
-            display: flex;
-            align-items: center;
-            background-color: rgb(32, 32, 32);
-            color: white;
-            font-weight: 100;
-        }
-        .navel{
-            margin: 5px 40px;
-        }
-        .big{
-            font-size: 2rem;
-        }
-        .logo{
-            margin: 0 10px;
-        }
-        header img{
-            margin: 10px 10px;
-            filter: invert();
-        }
-        .body{
-            text-align: center;
-            margin-top: 20px;
-        }
-    </style>
+    <title>ToDo's</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="nav">
-            <div class="logo" id="ele-0"><img src="images/todo.png" alt="ToDo" width="45px" height="40px"></div>
-            <div class="navel" id="ele-1">Home</div>
-            <div class="navel" id="ele-2">About</div>
-            <div class="navel" id="ele-3">See Also</div>
-            <div class="navel" id="ele-4">Contact Us</div>
-        </div>
-    </header>
-    <div class="body">
-        This is a to do list
+    <div id="title">
+        <img src="images/todo.png" alt="ToDo" height="40px" width="50px" style="margin: 5px 20px;">
+        <span id="value" onclick="focusin()">ToDo</span>
     </div>
 </body>
+<script src="script.js"></script>
 </html>

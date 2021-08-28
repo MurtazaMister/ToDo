@@ -1,0 +1,24 @@
+body{
+    margin:0;
+    padding:0;
+}
+#title{
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+    background-color: aqua;
+    height: 75px;
+    display: flex;
+    align-items: center;
+}
+#value{
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+    padding : 5px 15px;
+    padding-bottom: 0px;
+}
+#value2{
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+    margin: 0 15px;
+    height: 50px;
+}

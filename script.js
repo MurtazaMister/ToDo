@@ -6,14 +6,14 @@ let str = "ToDo - "+(date.getDate()).toString().padStart(2,'0')+'/'+(date.getMon
 m.innerText = str;
 
 function focusin(){
-    n.innerHTML = '<img src="images/todo.png" alt="ToDo" height="40px" width="50px" style="margin: 5px 20px;"><input type="text" name="todo" id="value2" onfocusout="focuslost()" onkeypress="check(event)">';
+    n.innerHTML = '<img src="images/todo.png" alt="ToDo" height="40px" width="50px" style="margin: 5px 20px;" onclick="focusin()"><input type="text" name="todo" id="value2" onfocusout="focuslost()" onkeypress="check(event)">';
     document.querySelector('#value2').value = str;
     document.querySelector('#value2').focus();
 };
 
 function focuslost(){
     let topic = document.querySelector('#value2').value;
-    n.innerHTML = '<img src="images/todo.png" alt="ToDo" height="40px" width="50px" style="margin: 5px 20px;"><span id="value" onclick="focusin()">'+topic+'</span>';
+    n.innerHTML = '<img src="images/todo.png" alt="ToDo" height="40px" width="50px" style="margin: 5px 20px;" onclick="focusin()"><span id="value" onclick="focusin()">'+topic+'</span>';
     m = document.querySelector('#value');
 }
 

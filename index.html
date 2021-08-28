@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToDo's</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <title>PreToDo</title>
 </head>
 <body>
-    <div id="title">
-        <img src="images/todo.png" alt="ToDo" height="40px" width="50px" style="margin: 5px 20px;">
-        <span id="value" onclick="focusin()">ToDo</span>
-    </div>
+    <input type="text" name="name" id="name" onkeypress="check(event)">
+    <input id = 'btn' type="button" value="Enter" onclick="enter()">
 </body>
-<script src="script.js"></script>
+<script>
+    function enter(){
+        localStorage.clear();
+        localStorage.setItem('name',document.querySelector('#name').value);
+        window.location.href = 'todo.html';
+    }
+    function check(event){
+        if(event.keyCode == 13){
+            document.querySelector('#btn').click();
+        }
+    }
+</script>
 </html>

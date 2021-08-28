@@ -1,14 +1,16 @@
 body{
     margin:0;
     padding:0;
+    background-color: rgb(247, 157, 125);
 }
 #title{
     font-family: 'Pacifico', cursive;
     font-size: 40px;
-    background-color: aqua;
+    background-color: tomato;
     height: 75px;
     display: flex;
     align-items: center;
+    overflow:auto;
 }
 #value{
     font-family: 'Pacifico', cursive;

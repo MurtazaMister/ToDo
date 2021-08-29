@@ -14,7 +14,7 @@
     function enter(){
         localStorage.clear();
         localStorage.setItem('name',document.querySelector('#name').value);
-        window.location.href = 'todo.html';
+        window.location.assign('todo.html');
     }
     function check(event){
         if(event.keyCode == 13){

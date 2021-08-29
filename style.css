@@ -3,6 +3,14 @@ body{
     padding:0;
     background-color: rgb(247, 157, 125);
 }
+#pre{
+    background: rgb(225, 225, 225) url('images/preloader.gif') center center no-repeat;
+    width: 100%;
+    height: 100vh;
+    background-size: 40%;
+    position: fixed;
+    z-index: 100;
+}
 #title{
     font-family: 'Pacifico', cursive;
     font-size: 40px;
@@ -11,6 +19,23 @@ body{
     display: flex;
     align-items: center;
     overflow:auto;
+}
+#n{
+    font-family: 'Satisfy', cursive;
+    font-size: 30px;
+    background-color: tomato;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+#n span{
+    margin-right: 20px;
+}
+#userinp{
+    font-family: 'Satisfy', cursive;
+    font-size: 30px;
+    height: 35px;
 }
 #value{
     font-family: 'Pacifico', cursive;
@@ -23,4 +48,68 @@ body{
     font-size: 40px;
     margin: 0 15px;
     height: 50px;
+}
+.body{
+    font-family: 'Patrick Hand', cursive;
+}
+.content{
+    font-size: 25px;
+    padding-left: 15px;
+}
+.elements{
+    margin: 0;
+    padding: 0;
+}
+#rcheck{
+    width:30px;
+    height: 30px;
+}
+#rtask{
+    height: 30px;
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    margin-left: 5px;
+}
+#redit{
+    background-color: transparent;
+    border: 2px solid transparent;
+    margin-left: 8px;
+    height:35px;
+    width:35px;
+    font-size: 20px;
+}
+#redit:hover{
+    border:2px solid #977d75;
+    border-radius: 15px;
+}
+#rstar{
+    height:35px;
+    width:35px;
+    font-size: 20px;
+    background-color: transparent;
+    border: 2px solid transparent;
+    text-align: center;
+}
+#rstar:hover{
+    border: 2px solid #ffc83d;
+    border-radius: 15px;
+}
+#rcolor{
+    background-color: transparent;
+    border: 1px solid transparent;
+    width: 50px;
+    height: 30px;
+    font-size: 19px;
+}
+#rdel{
+    background-color: transparent;
+    border: 1px solid transparent;
+    height:35px;
+    width:35px;
+    font-size: 20px;
+}
+#rdel:hover{
+    border: 2px solid rgb(240, 58, 23);
+    border-radius: 15px;
 }

@@ -60,9 +60,46 @@ body{
     margin: 0;
     padding: 0;
 }
+.check{
+    position: relative;
+}
+#add{
+    font-family: 'Patrick Hand', cursive; 
+    margin:0px; 
+    height:45px; 
+    width:60px; 
+    font-size: 17px; 
+    border-radius: 15px; 
+    border:none; 
+    background-color: antiquewhite;
+}
+#add:hover{
+    background-color: rgb(252, 222, 183);
+    cursor: pointer;
+}
+#clear{
+    font-family: 'Patrick Hand'; 
+    margin:0px; 
+    height:45px; 
+    width:60px; 
+    font-size: 17px; 
+    border-radius: 15px; 
+    border:none; 
+    background-color: antiquewhite;
+}
+#clear:hover{
+    background-color: rgb(252, 222, 183);
+    cursor: pointer;
+}
 .rcheck{
     width:30px;
     height: 30px;
+    position: absolute;
+    margin:auto;
+    top:0;
+    bottom:0;
+    left: 0;
+    right: 0;
 }
 .rtask{
     height: 30px;
@@ -70,6 +107,9 @@ body{
     border: none;
     background-color: transparent;
     margin-left: 5px;
+}
+.rtask:focus{
+    outline: none;
 }
 .redit{
     background-color: transparent;
@@ -101,6 +141,9 @@ body{
     width: 50px;
     height: 30px;
     font-size: 19px;
+}
+.rcolor:focus{
+    outline:none;
 }
 .rdel{
     background-color: transparent;

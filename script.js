@@ -57,28 +57,38 @@ function focusl(){
 //-----------------------------------------------------------------------------------------------------------\\
 let count = 0;
 {
+
+
     let add = document.querySelector('#add');
     let clear = document.querySelector('#clear');
     clear.addEventListener('click',()=>{
         document.querySelector('#entry').value = "";
     })
 
-    let list = document.querySelector('#main');
     add.addEventListener('click',()=>{
+        let list = document.querySelector('#main');
         let k = document.querySelector('#entry').value;
-        if(k==null){
+        let arr = [].map.call(k,c=>c);
+        let len = k.length;
+        let reallen = 0;
+        for(let i = 0;i<len;i++){
+            if(arr[i]!=' '){
+                reallen++;
+            }
+        }
+        if(reallen<=0){
+            window.alert('Empty task cannot be inserted.');
             return;
         }
-        console.log(k);
         count++;
         list.innerHTML += 
         `
-        <tr id='${count}'>
-        <td class="check" style="width:40px;"><input type="checkbox" name="Done" id='rcheck' class="elements"></td>
-        <td class="task" style="width:auto;"><input type="text" name="work" id='rtask' class="elements" value="" disabled></td>
-        <td class="edit" style="width:40px;"><input type="button" value="🖊" id='redit' class="elements"></td>
-        <td class="star" style="width:40px;"><input type="button" value="⭐" id='rstar' class="elements"></td>
-        <td class="color" style="width:40px;"><select name="colsel" id='rcolor' class="elements">
+        <tr class=${count}>
+        <td class="check" style="width:40px;"><input type="checkbox" name="Done" class="rcheck elements"></td>
+        <td class="task" style="width:auto;"><input type="text" name="work" class="rtask elements" value='${k}' disabled></td>
+        <td class="edit" style="width:40px;"><input type="button" value="🖊" class="redit elements"></td>
+        <td class="star" style="width:40px;"><input type="button" value="⭐" class="rstar elements"></td>
+        <td class="color" style="width:40px;"><select name="colsel" class="rcolor elements">
             <option class="options" value="none" selected>🚫</option>
             <option class="options" value="Blue">🔵</option>
             <option class="options" value="Yellow">🟡</option>
@@ -86,10 +96,10 @@ let count = 0;
             <option class="options" value="Purple">🟣</option>
             <option class="options" value="Red">🔴</option>
         </select></td>
-        <td class="del" style="width:40px;"><input type="button" value="❌" id='rdel' class="elements"></td>
+        <td class="del" style="width:40px;"><input type="button" value="❌" class="rdel elements"></td>
         </tr>
         `;
-        list.getElementById('rtask') = k;
         clear.click();
     })
 }
+

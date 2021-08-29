@@ -60,18 +60,18 @@ body{
     margin: 0;
     padding: 0;
 }
-#rcheck{
+.rcheck{
     width:30px;
     height: 30px;
 }
-#rtask{
+.rtask{
     height: 30px;
     width: 100%;
     border: none;
     background-color: transparent;
     margin-left: 5px;
 }
-#redit{
+.redit{
     background-color: transparent;
     border: 2px solid transparent;
     margin-left: 8px;
@@ -79,11 +79,11 @@ body{
     width:35px;
     font-size: 20px;
 }
-#redit:hover{
+.redit:hover{
     border:2px solid #977d75;
     border-radius: 15px;
 }
-#rstar{
+.rstar{
     height:35px;
     width:35px;
     font-size: 20px;
@@ -91,25 +91,25 @@ body{
     border: 2px solid transparent;
     text-align: center;
 }
-#rstar:hover{
+.rstar:hover{
     border: 2px solid #ffc83d;
     border-radius: 15px;
 }
-#rcolor{
+.rcolor{
     background-color: transparent;
     border: 1px solid transparent;
     width: 50px;
     height: 30px;
     font-size: 19px;
 }
-#rdel{
+.rdel{
     background-color: transparent;
     border: 1px solid transparent;
     height:35px;
     width:35px;
     font-size: 20px;
 }
-#rdel:hover{
+.rdel:hover{
     border: 2px solid rgb(240, 58, 23);
     border-radius: 15px;
 }

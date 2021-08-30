@@ -86,25 +86,52 @@ let count = 0;
             return;
         }
         count++;
-        let h = 
-        list.innerHTML = 
-        `
-        <tr class='${count}'>
-        <td class="check" style="width:40px;"><input type="checkbox" name="Done" class="rcheck elements" onclick="checkk(this)"></td>
-        <td class="task" style="width:auto;"><input type="text" name="work" class="rtask elements" value="${k}" onfocusout="dis(this)" onkeypress="taskkey(this,event)" disabled></td>
-        <td class="edit" style="width:40px;"><input type="button" value="🖊" class="redit elements" onclick="edit(this)"></td>
-        <td class="star" style="width:40px;"><input type="button" value="⭐" class="rstar elements"></td>
-        <td class="color" style="width:40px;"><select name="colsel" class="rcolor elements" onchange="col(this)">
-            <option class="options" value="None" selected>🚫</option>
-            <option class="options" value="Blue">🔵</option>
-            <option class="options" value="Yellow">🟡</option>
-            <option class="options" value="Green">🟢</option>
-            <option class="options" value="Purple">🟣</option>
-            <option class="options" value="Red">🔴</option>
-        </select></td>
-        <td class="del" style="width:40px;"><input type="button" value="❌" class="rdel elements" onclick="del(this)"></td>
-        </tr>
-        ` + list.innerHTML;
+        if(list.hasChildNodes()===true){
+            let y = 0;
+            while(document.getElementsByClassName('rstar')[y].style.backgroundColor === 'rgb(255, 200, 61)'){
+                y++;
+            }
+            let newobj = document.createElement('tr');
+            newobj.className = count;
+            newobj.innerHTML = 
+            `
+            <td class="check" style="width:40px;"><input type="checkbox" name="Done" class="rcheck elements" onclick="checkk(this)"></td>
+            <td class="task" style="width:auto;"><input type="text" name="work" class="rtask elements" value="${k}" onfocusout="dis(this)" onkeypress="taskkey(this,event)" disabled></td>
+            <td class="edit" style="width:40px;"><input type="button" value="🖊" class="redit elements" onclick="edit(this)"></td>
+            <td class="star" style="width:40px;"><input type="button" value="⭐" class="rstar elements" onclick="star(this)"></td>
+            <td class="color" style="width:40px;"><select name="colsel" class="rcolor elements" onchange="col(this)">
+                <option class="options" value="None" selected>🚫</option>
+                <option class="options" value="Blue">🔵</option>
+                <option class="options" value="Yellow">🟡</option>
+                <option class="options" value="Green">🟢</option>
+                <option class="options" value="Purple">🟣</option>
+                <option class="options" value="Red">🔴</option>
+            </select></td>
+            <td class="del" style="width:40px;"><input type="button" value="❌" class="rdel elements" onclick="del(this)"></td>
+            ` ;
+            list.insertBefore(newobj,list.childNodes[y+1]);
+        }
+        else{
+            let h = 
+            list.innerHTML = 
+            `
+            <tr class='${count}'>
+            <td class="check" style="width:40px;"><input type="checkbox" name="Done" class="rcheck elements" onclick="checkk(this)"></td>
+            <td class="task" style="width:auto;"><input type="text" name="work" class="rtask elements" value="${k}" onfocusout="dis(this)" onkeypress="taskkey(this,event)" disabled></td>
+            <td class="edit" style="width:40px;"><input type="button" value="🖊" class="redit elements" onclick="edit(this)"></td>
+            <td class="star" style="width:40px;"><input type="button" value="⭐" class="rstar elements" onclick="star(this)"></td>
+            <td class="color" style="width:40px;"><select name="colsel" class="rcolor elements" onchange="col(this)">
+                <option class="options" value="None" selected>🚫</option>
+                <option class="options" value="Blue">🔵</option>
+                <option class="options" value="Yellow">🟡</option>
+                <option class="options" value="Green">🟢</option>
+                <option class="options" value="Purple">🟣</option>
+                <option class="options" value="Red">🔴</option>
+            </select></td>
+            <td class="del" style="width:40px;"><input type="button" value="❌" class="rdel elements" onclick="del(this)"></td>
+            </tr>
+            ` + list.innerHTML;
+        }
         clear.click();
     })
 }
@@ -167,29 +194,39 @@ function col(selector){
 function checkk(checkbox){
     let list = document.querySelector('#main');
     if(checkbox.checked){
-        let parentName = document.getElementsByClassName('rcheck')[0].parentElement.parentElement.className;
-        let html = document.getElementsByClassName('rcheck')[0].parentElement.parentElement.innerHTML;
-        let value = document.getElementsByClassName('rcheck')[0].parentElement.parentElement.getElementsByClassName('rtask')[0].value;
-        let color = document.getElementsByClassName('rcheck')[0].parentElement.parentElement.getElementsByClassName('rcolor')[0].value;
-        checkbox.parentElement.parentElement.getElementsByClassName('rdel')[0].click();
-        let newobj = document.createElement('tr');
-        newobj.className = parentName;
-        newobj.innerHTML = html;
-        newobj.getElementsByClassName('rcheck')[0].checked = true;
-        newobj.getElementsByClassName('rtask')[0].value = '';
-        newobj.getElementsByClassName('rtask')[0].value = value;
-        newobj.getElementsByClassName('rcolor')[0].value = color;
-        newobj.getElementsByClassName('rtask')[0].style.textDecoration = 'line-through';
-        list.appendChild(newobj);
+        let parentName = checkbox.parentElement.parentElement.className;
+        document.getElementsByClassName(parentName)[0].getElementsByClassName('redit')[0].disabled =true;
+        document.getElementsByClassName(parentName)[0].getElementsByClassName('rstar')[0].disabled =true;
+        document.getElementsByClassName(parentName)[0].getElementsByClassName('rcolor')[0].disabled =true;
+        document.getElementsByClassName(parentName)[0].getElementsByClassName('rstar')[0].style.backgroundColor ='transparent';
+        document.getElementsByClassName(parentName)[0].getElementsByClassName('rtask')[0].style.textDecoration = 'line-through';
+        list.appendChild(document.getElementsByClassName(parentName)[0]);
     }
     else{
-        let parentName = document.getElementsByClassName('rcheck')[0].parentElement.parentElement.className;
-        let html = document.getElementsByClassName('rcheck')[0].parentElement.parentElement.innerHTML;
-        checkbox.parentElement.parentElement.getElementsByClassName('rdel')[0].click();
-        let newobj = document.createElement('tr');
-        newobj.className = parentName;
-        newobj.innerHTML = html;
-        newobj.getElementsByClassName('rtask')[0].style.textDecoration = 'none';
-        list.insertBefore(newobj,list.childNodes[0]);
+        let y = 0;
+        while(document.getElementsByClassName('rtask')[y].style.textDecoration !== 'line-through'){
+            y++;
+        }
+        checkbox.parentElement.parentElement.getElementsByClassName('rtask')[0].style.textDecoration = 'none';
+        checkbox.parentElement.parentElement.getElementsByClassName('redit')[0].disabled = false;
+        checkbox.parentElement.parentElement.getElementsByClassName('rcolor')[0].disabled = false;
+        checkbox.parentElement.parentElement.getElementsByClassName('rstar')[0].disabled = false;
+        list.insertBefore(checkbox.parentElement.parentElement,document.getElementsByTagName('tr')[y+1]);
+    }
+}
+
+function star(starbtn){
+    let list = document.querySelector('#main');
+    if(starbtn.style.backgroundColor !== 'rgb(255, 200, 61)'){
+        starbtn.style.backgroundColor = 'rgb(255, 200, 61)';
+        list.insertBefore(starbtn.parentElement.parentElement,list.childNodes[0]);
+    }
+    else{
+        let y = 0;
+        while(document.getElementsByClassName('rstar')[y].style.backgroundColor === 'rgb(255, 200, 61)'){
+            y++;
+        }
+        starbtn.style.backgroundColor = "transparent";
+        list.insertBefore(starbtn.parentElement.parentElement,list.childNodes[y+1]);
     }
 }

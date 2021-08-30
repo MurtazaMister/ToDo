@@ -49,6 +49,9 @@ body{
     margin: 0 15px;
     height: 50px;
 }
+#entry:focus{
+    outline: none;
+}
 .body{
     font-family: 'Patrick Hand', cursive;
 }

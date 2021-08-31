@@ -303,10 +303,17 @@ function star(starbtn){
     }
     else{
         let y = 0;
-        while(document.getElementsByClassName('rstar')[y].style.backgroundColor === 'rgb(255, 200, 61)'){
+        let c = list.getElementsByTagName('tr').length;
+        while(y<=c && document.getElementsByClassName('rstar')[y].style.backgroundColor === 'rgb(255, 200, 61)'){
             y++;
+            if(y==c){break;}
+        }
+        if(y==c){
+            list.appendChild(starbtn.parentElement.parentElement);
+        }
+        else{
+            list.insertBefore(starbtn.parentElement.parentElement,list.childNodes[y]);
         }
         starbtn.style.backgroundColor = "transparent";
-        list.insertBefore(starbtn.parentElement.parentElement,list.childNodes[y]);
     }
 }

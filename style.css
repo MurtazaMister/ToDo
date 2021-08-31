@@ -20,9 +20,18 @@
     font-size: 26px;
     font-family: 'Charm', cursive;
 }
-/* #nbtn{
-    
-} */
+#nbtn{
+    width:90px;
+    height: 30px;   
+    font-family: 'Mate SC', serif;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 2px solid;
+}
+#nbtn:hover{
+    cursor: pointer;
+    background-color: rgb(204, 204, 204);
+}
 #userinp:focus{
     outline:none;
     border: none;

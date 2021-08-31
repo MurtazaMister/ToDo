@@ -1,4 +1,70 @@
 //-----------------------------------------------------------------------------------------------------------\\
+
+function createRow(count, k){
+    let newobj = document.createElement('tr');
+            newobj.className = count+" trr";
+            newobj.innerHTML = 
+            `
+            <td class="check" style="width:40px;"><input type="checkbox" name="Done" class="rcheck elements" onclick="checkk(this)"></td>
+            <td class="task" style="width:auto;"><input type="text" name="work" class="rtask elements" style="font-family: 'Alegreya Sans', sans-serif;" value="${k}" onfocusout="dis(this)" onkeypress="taskkey(this,event)" disabled></td>
+            <td class="edit" style="width:40px;"><input type="button" value="🖊" class="redit elements" onclick="edit(this)"></td>
+            <td class="star" style="width:40px;"><input type="button" value="⭐" class="rstar elements" onclick="star(this)"></td>
+            <td class="color" style="width:40px;"><select name="colsel" class="rcolor elements" onchange="col(this)">
+                <option class="options" value="None" selected>🚫</option>
+                <option class="options" value="Blue">🔵</option>
+                <option class="options" value="Yellow">🟡</option>
+                <option class="options" value="Green">🟢</option>
+                <option class="options" value="Purple">🟣</option>
+                <option class="options" value="Red">🔴</option>
+            </select></td>
+            <td class="del" style="width:40px;"><input type="button" value="❌" class="rdel elements" onclick="del(this)"></td>
+            ` ;
+    return newobj;
+}
+
+function insert(count, k){
+    let list = document.querySelector('#main');
+    count++;
+        if(list.hasChildNodes()){
+            let y = 0;
+            while(document.getElementsByClassName('rstar')[y].style.backgroundColor === 'rgb(255, 200, 61)'){
+                y++;
+            }
+            let newobj = createRow(count, k);
+            list.insertBefore(newobj,list.childNodes[y]);
+        }
+        else{
+            let newobj = createRow(count,k);
+            list.appendChild(newobj);
+        }
+        clear.click();
+        return count;
+}
+//-----------------------------------------------------------------------------------------------------------\\
+
+function checkNull(valuee){
+    if(valuee.length === 0){
+        return 0;
+    }
+    else{
+        let arr = [].map.call(valuee,x=>x);
+        let len = valuee.length;
+        let reallen = 0;
+        for(let i = 0;i<len;i++){
+            if(arr[i]!=' '){
+                reallen++;
+            }
+        }
+        if(reallen>0){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------\\
 function npgbtn(event){
     if(event.keyCode == 13){
         document.getElementById('nbtn').click();
@@ -58,6 +124,9 @@ function focusin(){
 
 function focuslost(){
     let topic = document.querySelector('#value2').value;
+    if(checkNull(topic)==0){
+        topic = "ToDo - "+(date.getDate()).toString().padStart(2,'0')+'/'+(date.getMonth()+1).toString().padStart(2,'0')+'/'+date.getFullYear();
+    }
     n.innerHTML = '<img src="images/todo.png" alt="ToDo" height="40px" width="50px" style="margin: 5px 20px;" onclick="focusin()"><span id="value" onclick="focusin()">'+topic+'</span>';
     m = document.querySelector('#value');
 }
@@ -98,7 +167,12 @@ function tp(){}
 function focusl(){
     let q = document.querySelector('#userinp');
     let z = q.value;
-    document.querySelector('#username').innerHTML = z;
+    if(checkNull(z)==1){
+        document.querySelector('#username').innerHTML = z;
+    }
+    else{
+        document.querySelector('#username').innerHTML = "Your name";
+    }
 }
 
 //-----------------------------------------------------------------------------------------------------------\\
@@ -120,66 +194,31 @@ let count = 0;
     add.addEventListener('click',()=>{
         let list = document.querySelector('#main');
         let k = document.querySelector('#entry').value;
-        let arr = [].map.call(k,c=>c);
-        let len = k.length;
-        let reallen = 0;
-        for(let i = 0;i<len;i++){
-            if(arr[i]!=' '){
-                reallen++;
+        if(checkNull(k)){
+            let arr = [].map.call(k,c=>c);
+            let u = "";
+            for(let i = 0;i<arr.length;i++){
+                if(arr[i]==';'){
+                    if(checkNull(u)){
+                    count = insert(count,u);
+                    u = "";
+                    }
+                    else{
+                        u="";
+                    }
+                }
+                else{
+                    u+=arr[i];
+                }
+            }
+            if(checkNull(u)){
+                count = insert(count,u);
             }
         }
-        if(reallen<=0){
+        else{
             window.alert('Empty task cannot be inserted.');
             return;
         }
-        count++;
-        if(list.hasChildNodes()===true){
-            let y = 0;
-            while(document.getElementsByClassName('rstar')[y].style.backgroundColor === 'rgb(255, 200, 61)'){
-                y++;
-            }
-            let newobj = document.createElement('tr');
-            newobj.className = count;
-            newobj.innerHTML = 
-            `
-            <td class="check" style="width:40px;"><input type="checkbox" name="Done" class="rcheck elements" onclick="checkk(this)"></td>
-            <td class="task" style="width:auto;"><input type="text" name="work" class="rtask elements" style="font-family: 'Alegreya Sans', sans-serif;" value="${k}" onfocusout="dis(this)" onkeypress="taskkey(this,event)" disabled></td>
-            <td class="edit" style="width:40px;"><input type="button" value="🖊" class="redit elements" onclick="edit(this)"></td>
-            <td class="star" style="width:40px;"><input type="button" value="⭐" class="rstar elements" onclick="star(this)"></td>
-            <td class="color" style="width:40px;"><select name="colsel" class="rcolor elements" onchange="col(this)">
-                <option class="options" value="None" selected>🚫</option>
-                <option class="options" value="Blue">🔵</option>
-                <option class="options" value="Yellow">🟡</option>
-                <option class="options" value="Green">🟢</option>
-                <option class="options" value="Purple">🟣</option>
-                <option class="options" value="Red">🔴</option>
-            </select></td>
-            <td class="del" style="width:40px;"><input type="button" value="❌" class="rdel elements" onclick="del(this)"></td>
-            ` ;
-            list.insertBefore(newobj,list.childNodes[y+1]);
-        }
-        else{
-            let h = 
-            list.innerHTML = 
-            `
-            <tr class='${count}'>
-            <td class="check" style="width:40px;"><input type="checkbox" name="Done" class="rcheck elements" onclick="checkk(this)"></td>
-            <td class="task" style="width:auto;"><input type="text" name="work" class="rtask elements" style="font-family: 'Alegreya Sans', sans-serif;" value="${k}" onfocusout="dis(this)" onkeypress="taskkey(this,event)" disabled></td>
-            <td class="edit" style="width:40px;"><input type="button" value="🖊" class="redit elements" onclick="edit(this)"></td>
-            <td class="star" style="width:40px;"><input type="button" value="⭐" class="rstar elements" onclick="star(this)"></td>
-            <td class="color" style="width:40px;"><select name="colsel" class="rcolor elements" onchange="col(this)">
-                <option class="options" value="None" selected>🚫</option>
-                <option class="options" value="Blue">🔵</option>
-                <option class="options" value="Yellow">🟡</option>
-                <option class="options" value="Green">🟢</option>
-                <option class="options" value="Purple">🟣</option>
-                <option class="options" value="Red">🔴</option>
-            </select></td>
-            <td class="del" style="width:40px;"><input type="button" value="❌" class="rdel elements" onclick="del(this)"></td>
-            </tr>
-            ` + list.innerHTML;
-        }
-        clear.click();
     })
 }
 //-----------------------------------------------------------------------------------------------------------\\
@@ -268,6 +307,6 @@ function star(starbtn){
             y++;
         }
         starbtn.style.backgroundColor = "transparent";
-        list.insertBefore(starbtn.parentElement.parentElement,list.childNodes[y+1]);
+        list.insertBefore(starbtn.parentElement.parentElement,list.childNodes[y]);
     }
 }

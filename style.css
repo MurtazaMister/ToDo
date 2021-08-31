@@ -142,6 +142,9 @@ body{
     background-color: rgb(252, 222, 183);
     cursor: pointer;
 }
+.trr:hover{
+    background-color: #fa895f;
+}
 .rcheck{
     width:30px;
     height: 30px;

@@ -1,4 +1,47 @@
 //-----------------------------------------------------------------------------------------------------------\\
+function npgbtn(event){
+    if(event.keyCode == 13){
+        document.getElementById('nbtn').click();
+    }
+}
+function nextpage(){
+    localStorage.clear();
+    localStorage.setItem('name',document.querySelector('#user').value);
+    let v = localStorage.getItem('name');
+
+    let len = v.length;
+    let reallen = 0;
+    if(len>0 && v!==null){
+        let arr = [].map.call(v,v=>v);
+        for(let i = 0;i<len;i++){
+            if(arr[i]!=' '){
+                reallen++;
+            }
+        }
+    }
+    if(reallen == 0){v=null;}
+    if(v===null){
+        v = 'Your Name';
+    }
+    let nn = document.querySelector('#n');
+    nn.innerHTML = '<span style="font-size: 20px">To do list for - </span><span style="font-size:30px" id="username" onclick="user()">'+v+'</   span>';
+    localStorage.clear();
+
+    document.getElementsByTagName('span')[0].style.display = 'none';
+    document.getElementsByTagName('input')[0].style.display = 'none';
+    document.getElementsByTagName('input')[1].style.display = 'none';
+    document.getElementById('pre').style.background = 'rgb(225, 225, 225) url(\'images/preloader.gif\') center center no-repeat';
+    document.getElementById('pre').style.backgroundSize = '40%';
+    window.setTimeout(()=>{
+        nnext();
+    },2500);
+}
+function nnext(){
+    let pree = document.getElementById('pre');
+    pree.style.display = 'none';
+    document.getElementById('entry').focus();
+}
+//-----------------------------------------------------------------------------------------------------------\\
 {
 let n = document.querySelector('#title');
 let m = document.querySelector('#value');
@@ -8,7 +51,7 @@ let str = "ToDo - "+(date.getDate()).toString().padStart(2,'0')+'/'+(date.getMon
 m.innerText = str;
 
 function focusin(){
-    n.innerHTML = '<img src="images/todo.png" alt="ToDo" height="40px" width="50px" style="margin: 5px 20px;" onclick="focusin()"><input type="text" name="todo" id="value2" onfocusout="focuslost()" onkeypress="check(event)">';
+    n.innerHTML = '<img src="images/todo.png" alt="ToDo" height="40px" width="50px" style="margin: 5px 20px;" onclick="focusin()"><input type="text" name="todo" id="value2" onfocusout="focuslost()" onkeypress="check(event)" style="width:100%;">';
     document.querySelector('#value2').value = str;
     document.querySelector('#value2').focus();
 };
@@ -26,14 +69,18 @@ function check(event){
 }
 }
 //-----------------------------------------------------------------------------------------------------------\\
-{
-let v = localStorage.getItem('name');
-if(v==null){
-    v = 'Your Name';
-}
-let nn = document.querySelector('#n');
-nn.innerHTML = '<span style="font-size: 20px">To do list for - </span><span style="font-size:30px" id="username" onclick="user()">'+v+'</span>';
-localStorage.clear();
+
+// Clearlist
+    function kill(){
+        if(confirm('Are you sure you want to clear your list?')){
+        let target = document.querySelector('#main');
+        while(target.hasChildNodes()){
+            target.removeChild(target.firstChild);
+        }
+    }
+    }   
+//-----------------------------------------------------------------------------------------------------------\\
+
 function check2(event){
     if(event.keyCode == 13){
         document.querySelector('#userinp').blur();
@@ -53,7 +100,7 @@ function focusl(){
     let z = q.value;
     document.querySelector('#username').innerHTML = z;
 }
-}
+
 //-----------------------------------------------------------------------------------------------------------\\
 let count = 0;
 {
@@ -96,7 +143,7 @@ let count = 0;
             newobj.innerHTML = 
             `
             <td class="check" style="width:40px;"><input type="checkbox" name="Done" class="rcheck elements" onclick="checkk(this)"></td>
-            <td class="task" style="width:auto;"><input type="text" name="work" class="rtask elements" value="${k}" onfocusout="dis(this)" onkeypress="taskkey(this,event)" disabled></td>
+            <td class="task" style="width:auto;"><input type="text" name="work" class="rtask elements" style="font-family: 'Alegreya Sans', sans-serif;" value="${k}" onfocusout="dis(this)" onkeypress="taskkey(this,event)" disabled></td>
             <td class="edit" style="width:40px;"><input type="button" value="🖊" class="redit elements" onclick="edit(this)"></td>
             <td class="star" style="width:40px;"><input type="button" value="⭐" class="rstar elements" onclick="star(this)"></td>
             <td class="color" style="width:40px;"><select name="colsel" class="rcolor elements" onchange="col(this)">
@@ -117,7 +164,7 @@ let count = 0;
             `
             <tr class='${count}'>
             <td class="check" style="width:40px;"><input type="checkbox" name="Done" class="rcheck elements" onclick="checkk(this)"></td>
-            <td class="task" style="width:auto;"><input type="text" name="work" class="rtask elements" value="${k}" onfocusout="dis(this)" onkeypress="taskkey(this,event)" disabled></td>
+            <td class="task" style="width:auto;"><input type="text" name="work" class="rtask elements" style="font-family: 'Alegreya Sans', sans-serif;" value="${k}" onfocusout="dis(this)" onkeypress="taskkey(this,event)" disabled></td>
             <td class="edit" style="width:40px;"><input type="button" value="🖊" class="redit elements" onclick="edit(this)"></td>
             <td class="star" style="width:40px;"><input type="button" value="⭐" class="rstar elements" onclick="star(this)"></td>
             <td class="color" style="width:40px;"><select name="colsel" class="rcolor elements" onchange="col(this)">
@@ -164,27 +211,21 @@ function col(selector){
     switch(col){
         case 'None': 
         row.getElementsByClassName('check')[0].style.backgroundColor = "rgb(247,157,125)";
-        row.getElementsByClassName('task')[0].style.backgroundColor = "rgb(247,157,125)";
         break;
         case 'Blue': 
         row.getElementsByClassName('check')[0].style.backgroundColor = "#7abbde";
-        row.getElementsByClassName('task')[0].style.backgroundColor = "#7abbde";
         break;
         case 'Yellow': 
-        row.getElementsByClassName('check')[0].style.backgroundColor = "#ffc066";
-        row.getElementsByClassName('task')[0].style.backgroundColor = "#ffc066";
+        row.getElementsByClassName('check')[0].style.backgroundColor = "yellow";
         break;
         case 'Green': 
         row.getElementsByClassName('check')[0].style.backgroundColor = "#7ed779";
-        row.getElementsByClassName('task')[0].style.backgroundColor = "#7ed779";
         break;
         case 'Purple': 
-        row.getElementsByClassName('check')[0].style.backgroundColor = "#d38ffe";
-        row.getElementsByClassName('task')[0].style.backgroundColor = "#d38ffe";
+        row.getElementsByClassName('check')[0].style.backgroundColor = "#ac2aff";
         break;
         case 'Red': 
-        row.getElementsByClassName('check')[0].style.backgroundColor = "#ef5f6b";
-        row.getElementsByClassName('task')[0].style.backgroundColor = "#ef5f6b";
+        row.getElementsByClassName('check')[0].style.backgroundColor = "#f53646";
         break;
     }
     row.getElementsByClassName('check')[0].style.borderRadius = "5px";

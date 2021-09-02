@@ -340,18 +340,31 @@ function star(starbtn){
 }
 
 //-----------------------------------------------------------------------------------------------------------\\
-// function dateSel(btn){
-//     let parent = btn.parentElement;
-//     parent.innerHTML = '<input type="date" class = "datee" name="date" id="date" onfocusout="dateLost(this)">';
-//     var today = new Date();
-//     var dd = today.getDate();
-//     var mm = today.getMonth() + 1;
-//     var yyyy = today.getFullYear();
-//     today = yyyy+'-'+mm+'-'+dd;
-//     parent.getElementsByClassName('datee')[0].setAttribute("min", today);
-// }
-
-// function dateLost(dateEle){
-//     let due = dateEle.value;
-//     console.log(due);
-// }
+function dateSel(btn){
+    let parent = btn.parentElement;
+    parent.innerHTML = '<input type="date" class = "datee" name="date" id="date" onfocusout="dateLost(this)">';
+    var today = new Date();
+    var dd = (today.getDate()).toString().padStart(2,'0');
+    var mm = (today.getMonth() + 1).toString().padStart(2,'0');
+    var yyyy = today.getFullYear();
+    today = yyyy+'-'+mm+'-'+dd;
+    parent.getElementsByClassName('datee')[0].setAttribute("min", today);
+    makeLose(parent.getElementsByClassName('datee')[0]);
+}
+function makeLose(element){
+    window.setTimeout(()=>{dateLost(element);},15000);
+}
+function dateLost(dateEle){
+    let due = new Date(dateEle.value);
+    let parent = dateEle.parentElement;
+    if(parent == null){
+        return;
+    }
+    if(due == 'Invalid Date'){
+        parent.innerHTML = '<input type="button" value="No due date" id="due" style="background-color: white; border-radius: 10px; align-self:flex-end; font-size: 12px; padding:3px 10px; border:0.5px solid black;" onclick="dateSel(this)">'
+        return;
+    }
+    let day = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    let dateString = day[due.getDay()]+', '+ due.getDate().toString().padStart(2,'0') + '/'+(due.getMonth()+1).toString().padStart(2,'0')+'/'+due.getFullYear();
+    parent.innerHTML = '<input type="button" value="'+ dateString+'" id="due" style="background-color: white; border-radius: 10px; align-self:flex-end; font-size: 12px; padding:3px 10px; border:0.5px solid black;" onclick="dateSel(this)">';
+}

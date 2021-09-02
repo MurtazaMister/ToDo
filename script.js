@@ -6,7 +6,12 @@ function createRow(count, k){
             newobj.innerHTML = 
             `
             <td class="check" style="width:40px;"><input type="checkbox" name="Done" class="rcheck elements" onclick="checkk(this)"></td>
-            <td class="task" style="width:auto;"><input type="text" name="work" class="rtask elements" style="font-family: 'Alegreya Sans', sans-serif;" value="${k}" onfocusout="dis(this)" onkeypress="taskkey(this,event)" disabled></td>
+            <td class="task" style="width:auto; display:flex">
+            <input type="text" name="work" class="rtask elements" style="font-family: 'Alegreya Sans', sans-serif;" value="${k}" onfocusout="dis(this)" onkeypress="taskkey(this,event)" disabled>
+            <span class="datePar" style="display:flex">
+            <input type="button" value="No due date" id="due" style="background-color: white; border-radius: 10px; align-self:flex-end; font-size: 12px; padding:3px 10px; border:0.5px solid black;" onclick="dateSel(this)">
+            </span>
+            </td>
             <td class="edit" style="width:40px;"><input type="button" value="🖊" class="redit elements" onclick="edit(this)"></td>
             <td class="star" style="width:40px;"><input type="button" value="⭐" class="rstar elements" onclick="star(this)"></td>
             <td class="color" style="width:40px;"><select name="colsel" class="rcolor elements" onchange="col(this)">
@@ -27,11 +32,18 @@ function insert(count, k){
     count++;
         if(list.hasChildNodes()){
             let y = 0;
-            while(document.getElementsByClassName('rstar')[y].style.backgroundColor === 'rgb(255, 200, 61)'){
+            let c = list.getElementsByTagName('tr').length;
+            while(y<=c && document.getElementsByClassName('rstar')[y].style.backgroundColor === 'rgb(255, 200, 61)'){
                 y++;
+                if(y==c){break;}
             }
             let newobj = createRow(count, k);
-            list.insertBefore(newobj,list.childNodes[y]);
+            if(y==c){
+                list.appendChild(newobj);
+            }
+            else{
+                list.insertBefore(newobj,list.childNodes[y]);
+            }
         }
         else{
             let newobj = createRow(count,k);
@@ -90,7 +102,7 @@ function nextpage(){
         v = 'Your Name';
     }
     let nn = document.querySelector('#n');
-    nn.innerHTML = '<span style="font-size: 20px">To do list for - </span><span style="font-size:30px" id="username" onclick="user()">'+v+'</   span>';
+    nn.innerHTML = '<span style="font-size: 20px">To do list for - </span><span style="font-size:30px" id="username" onclick="user()">'+v+'</span>';
     localStorage.clear();
 
     document.getElementsByTagName('span')[0].style.display = 'none';
@@ -163,7 +175,9 @@ function user(){
     document.querySelector('#userinp').value = z;
     document.querySelector('#userinp').focus();
 }
-function tp(){}
+function tp(){
+    event.stopPropagation();
+}
 function focusl(){
     let q = document.querySelector('#userinp');
     let z = q.value;
@@ -197,14 +211,21 @@ let count = 0;
         if(checkNull(k)){
             let arr = [].map.call(k,c=>c);
             let u = "";
+            let con = "";
             for(let i = 0;i<arr.length;i++){
                 if(arr[i]==';'){
                     if(checkNull(u)){
-                    count = insert(count,u);
+                    count = insert(count,con+' '+u);
                     u = "";
                     }
                     else{
                         u="";
+                    }
+                }
+                else if(arr[i]==':'){
+                    if(checkNull(u)){
+                        con = u;
+                        u = "";
                     }
                 }
                 else{
@@ -212,7 +233,7 @@ let count = 0;
                 }
             }
             if(checkNull(u)){
-                count = insert(count,u);
+                count = insert(count,con+' '+u);
             }
         }
         else{
@@ -317,3 +338,20 @@ function star(starbtn){
         starbtn.style.backgroundColor = "transparent";
     }
 }
+
+//-----------------------------------------------------------------------------------------------------------\\
+// function dateSel(btn){
+//     let parent = btn.parentElement;
+//     parent.innerHTML = '<input type="date" class = "datee" name="date" id="date" onfocusout="dateLost(this)">';
+//     var today = new Date();
+//     var dd = today.getDate();
+//     var mm = today.getMonth() + 1;
+//     var yyyy = today.getFullYear();
+//     today = yyyy+'-'+mm+'-'+dd;
+//     parent.getElementsByClassName('datee')[0].setAttribute("min", today);
+// }
+
+// function dateLost(dateEle){
+//     let due = dateEle.value;
+//     console.log(due);
+// }

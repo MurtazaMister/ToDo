@@ -315,7 +315,7 @@ let str = "ToDo - "+(date.getDate()).toString().padStart(2,'0')+'/'+(date.getMon
 m.innerText = str;
 
 function focusin(){
-    n.innerHTML = '<img src="images/todo.png" alt="ToDo" height="40px" width="50px" style="margin: 5px 20px;" onclick="focusin()"><input type="text" name="todo" id="value2" onfocusout="focuslost()" onkeypress="check(event)" style="width:100%;">';
+    n.innerHTML = '<img src="Images/todo.png" alt="ToDo" height="40px" width="50px" style="margin: 5px 20px;" onclick="focusin()"><input type="text" name="todo" id="value2" onfocusout="focuslost()" onkeypress="check(event)" style="width:100%;">';
     document.querySelector('#value2').value = str;
     document.querySelector('#value2').focus();
 };
@@ -325,7 +325,7 @@ function focuslost(){
     if(checkNull(topic)==0){
         topic = "ToDo - "+(date.getDate()).toString().padStart(2,'0')+'/'+(date.getMonth()+1).toString().padStart(2,'0')+'/'+date.getFullYear();
     }
-    n.innerHTML = '<img src="images/todo.png" alt="ToDo" height="40px" width="50px" style="margin: 5px 20px;" onclick="focusin()"><span id="value" onclick="focusin()">'+topic+'</span>';
+    n.innerHTML = '<img src="Images/todo.png" alt="ToDo" height="40px" width="50px" style="margin: 5px 20px;" onclick="focusin()"><span id="value" onclick="focusin()">'+topic+'</span>';
     m = document.querySelector('#value');
 }
 

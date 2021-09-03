@@ -294,7 +294,7 @@ function nextpage(){
     document.getElementsByTagName('span')[0].style.display = 'none';
     document.getElementsByTagName('input')[0].style.display = 'none';
     document.getElementsByTagName('input')[1].style.display = 'none';
-    document.getElementById('pre').style.background = 'rgb(225, 225, 225) url(\'Images/preloader.GIF\') center center no-repeat';
+    document.getElementById('pre').style.background = 'rgb(225, 225, 225) url(\'Images/preloader.gif\') center center no-repeat';
     document.getElementById('pre').style.backgroundSize = '40%';
     window.setTimeout(()=>{
         nnext();

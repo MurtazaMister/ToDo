@@ -1,6 +1,191 @@
 //-----------------------------------------------------------------------------------------------------------\\
 
-function createRow(count, k){
+function sorter(element, order){
+    let list = document.querySelector('#main');
+    if(list.childElementCount > 1){
+        if(element.value=='By Value'){
+            sortText(order);
+        }
+        else if(element.value=='By Due Date'){
+            sortDate(order);
+        }
+        else if(element.value == 'By colours'){
+            sortColours(order);
+        }
+    }
+}
+
+function sortText(order){
+    let list = document.querySelector('#main');
+    let c = list.childElementCount;
+    if(order=='asc'){
+        for(let i = 0;i<c-1;i++){
+            for(let j = 0;j<c-1;j++){
+                let a = document.getElementsByClassName('trr')[j];
+                let b = document.getElementsByClassName('trr')[j+1];
+                a.getElementsByClassName('rstar')[0].style.backgroundColor = 'transparent';
+                b.getElementsByClassName('rstar')[0].style.backgroundColor = 'transparent';
+                let col1 = a.getElementsByClassName('rcolor')[0].value;
+                let col2 = b.getElementsByClassName('rcolor')[0].value;
+                if(a.getElementsByClassName('rtask')[0].value>b.getElementsByClassName('rtask')[0].value){
+                    let z = a.innerHTML;
+                    a.innerHTML = b.innerHTML;
+                    b.innerHTML =  z;
+                    a.getElementsByClassName('rcolor')[0].value = col2;
+                    b.getElementsByClassName('rcolor')[0].value = col1;
+                }
+            }
+        }
+    }
+    else{
+            for(let i = 0;i<c-1;i++){
+                for(let j = 0;j<c-1;j++){
+                    let a = document.getElementsByClassName('trr')[j];
+                    let b = document.getElementsByClassName('trr')[j+1];
+                    a.getElementsByClassName('rstar')[0].style.backgroundColor === 'transparent';
+                    b.getElementsByClassName('rstar')[0].style.backgroundColor === 'transparent';
+                    let col1 = a.getElementsByClassName('rcolor')[0].value;
+                    let col2 = b.getElementsByClassName('rcolor')[0].value;
+                    if(a.getElementsByClassName('rtask')[0].value<b.getElementsByClassName('rtask')[0].value){
+                        let z = a.innerHTML;
+                        a.innerHTML = b.innerHTML;
+                        b.innerHTML =  z;
+                        a.getElementsByClassName('rcolor')[0].value = col2;
+                    b.getElementsByClassName('rcolor')[0].value = col1;
+                    }
+                }
+            }
+    }
+}
+function sortColours(order){
+    let list = document.querySelector('#main');
+    let c = list.childElementCount;
+    if(order=='asc'){
+        for(let i = 0;i<c-1;i++){
+            for(let j = 0;j<c-1;j++){
+                let a = document.getElementsByClassName('trr')[j];
+                let b = document.getElementsByClassName('trr')[j+1];
+                a.getElementsByClassName('rstar')[0].style.backgroundColor = 'transparent';
+                b.getElementsByClassName('rstar')[0].style.backgroundColor = 'transparent';
+                let col1 = a.getElementsByClassName('rcolor')[0].value;
+                let col2 = b.getElementsByClassName('rcolor')[0].value;
+                if(col1=='None' || col1>col2){
+                    let z = a.innerHTML;
+                    a.innerHTML = b.innerHTML;
+                    b.innerHTML =  z;
+                    a.getElementsByClassName('rcolor')[0].value = col2;
+                    b.getElementsByClassName('rcolor')[0].value = col1;
+                }
+            }
+        }
+    }
+    else{
+            for(let i = 0;i<c-1;i++){
+                for(let j = 0;j<c-1;j++){
+                    let a = document.getElementsByClassName('trr')[j];
+                    let b = document.getElementsByClassName('trr')[j+1];
+                    a.getElementsByClassName('rstar')[0].style.backgroundColor === 'transparent';
+                    b.getElementsByClassName('rstar')[0].style.backgroundColor === 'transparent';
+                    let col1 = a.getElementsByClassName('rcolor')[0].value;
+                    let col2 = b.getElementsByClassName('rcolor')[0].value;
+                    if(col1=='None' || col1<col2){
+                        let z = a.innerHTML;
+                        a.innerHTML = b.innerHTML;
+                        b.innerHTML =  z;
+                        a.getElementsByClassName('rcolor')[0].value = col2;
+                        b.getElementsByClassName('rcolor')[0].value = col1;
+                    }
+                }
+            }
+    }
+}
+
+function ddaattee(a,b){
+    if(a=='No due date'){
+        return 1;
+    }
+    else if(b=='No due date'){
+        return 0;
+    }
+    else{
+        let part1 = a.substr(a.length-10).split('/');
+        let part2 = b.substr(b.length-10).split('/');      
+        let date1 = new Date(part1[2],(part1[1]-1),part1[0]);
+        let date2 = new Date(part2[2],(part2[1]-1),part2[0]);
+        let time1 = date1.getTime();
+        let time2 = date2.getTime();
+        if(time1>time2){
+            return 2;
+        }
+        else{
+            return -2;
+        }
+    }
+}
+
+function sortDate(order){
+    console.log('hi');
+    let list = document.querySelector('#main');
+    let c = list.childElementCount;
+    if(order=='asc'){
+        for(let i = 0;i<c-1;i++){
+            for(let j = 0;j<c-1;j++){
+                let a = document.getElementsByClassName('trr')[j];
+                let b = document.getElementsByClassName('trr')[j+1];
+                a.getElementsByClassName('rstar')[0].style.backgroundColor = 'transparent';
+                b.getElementsByClassName('rstar')[0].style.backgroundColor = 'transparent';
+                let decide = ddaattee(a.getElementsByClassName('rdate')[0].value,b.getElementsByClassName('rdate')[0].value);
+                let col1 = a.getElementsByClassName('rcolor')[0].value;
+                let col2 = b.getElementsByClassName('rcolor')[0].value;
+                if(decide == 1){
+                    let z = a.innerHTML;
+                    a.innerHTML = b.innerHTML;
+                    b.innerHTML =  z;
+                    a.getElementsByClassName('rcolor')[0].value = col2;
+                        b.getElementsByClassName('rcolor')[0].value = col1;
+                }
+                else if(decide == 2){
+                    let z = a.innerHTML;
+                    a.innerHTML = b.innerHTML;
+                    b.innerHTML =  z;
+                    a.getElementsByClassName('rcolor')[0].value = col2;
+                        b.getElementsByClassName('rcolor')[0].value = col1;
+                }
+            }
+        }
+    }
+    else{
+            for(let i = 0;i<c-1;i++){
+                for(let j = 0;j<c-1;j++){
+                    let a = document.getElementsByClassName('trr')[j];
+                    let b = document.getElementsByClassName('trr')[j+1];
+                    a.getElementsByClassName('rstar')[0].style.backgroundColor === 'transparent';
+                    b.getElementsByClassName('rstar')[0].style.backgroundColor === 'transparent';
+                    let decide = ddaattee(a.getElementsByClassName('rdate')[0].value,b.getElementsByClassName('rdate')[0].value);
+                    let col1 = a.getElementsByClassName('rcolor')[0].value;
+                    let col2 = b.getElementsByClassName('rcolor')[0].value;
+                    if(decide == 1){
+                        let z = a.innerHTML;
+                        a.innerHTML = b.innerHTML;
+                        b.innerHTML =  z;
+                        a.getElementsByClassName('rcolor')[0].value = col2;
+                        b.getElementsByClassName('rcolor')[0].value = col1;
+                    }
+                    else if(decide==-2){
+                        let z = a.innerHTML;
+                        a.innerHTML = b.innerHTML;
+                        b.innerHTML =  z;
+                        a.getElementsByClassName('rcolor')[0].value = col2;
+                        b.getElementsByClassName('rcolor')[0].value = col1;
+                    }
+                }
+            }
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------\\
+
+function createRow(count,k){
     let newobj = document.createElement('tr');
             newobj.className = count+" trr";
             newobj.innerHTML = 
@@ -9,7 +194,7 @@ function createRow(count, k){
             <td class="task" style="width:auto; display:flex">
             <input type="text" name="work" class="rtask elements" style="font-family: 'Alegreya Sans', sans-serif;" value="${k}" onfocusout="dis(this)" onkeypress="taskkey(this,event)" disabled>
             <span class="datePar" style="display:flex">
-            <input type="button" value="No due date" id="due" style="background-color: white; border-radius: 10px; align-self:flex-end; font-size: 12px; padding:3px 10px; border:0.5px solid black;" onclick="dateSel(this)">
+            <input type="button" value="No due date" class="rdate" id="due" style="background-color: white; border-radius: 10px; align-self:flex-end; font-size: 12px; padding:3px 10px; border:0.5px solid black;" onclick="dateSel(this)">
             </span>
             </td>
             <td class="edit" style="width:40px;"><input type="button" value="🖊" class="redit elements" onclick="edit(this)"></td>
@@ -50,6 +235,7 @@ function insert(count, k){
             list.appendChild(newobj);
         }
         clear.click();
+        document.querySelector('#sort').selectedIndex = 0;
         return count;
 }
 //-----------------------------------------------------------------------------------------------------------\\
@@ -361,10 +547,10 @@ function dateLost(dateEle){
         return;
     }
     if(due == 'Invalid Date'){
-        parent.innerHTML = '<input type="button" value="No due date" id="due" style="background-color: white; border-radius: 10px; align-self:flex-end; font-size: 12px; padding:3px 10px; border:0.5px solid black;" onclick="dateSel(this)">'
+        parent.innerHTML = '<input type="button" value="No due date" class="rdate" id="due" style="background-color: white; border-radius: 10px; align-self:flex-end; font-size: 12px; padding:3px 10px; border:0.5px solid black;" onclick="dateSel(this)">'
         return;
     }
     let day = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     let dateString = day[due.getDay()]+', '+ due.getDate().toString().padStart(2,'0') + '/'+(due.getMonth()+1).toString().padStart(2,'0')+'/'+due.getFullYear();
-    parent.innerHTML = '<input type="button" value="'+ dateString+'" id="due" style="background-color: white; border-radius: 10px; align-self:flex-end; font-size: 12px; padding:3px 10px; border:0.5px solid black;" onclick="dateSel(this)">';
+    parent.innerHTML = '<input type="button" value="'+ dateString+'" class="rdate" id="due" style="background-color: white; border-radius: 10px; align-self:flex-end; font-size: 12px; padding:3px 10px; border:0.5px solid black;" onclick="dateSel(this)">';
 }

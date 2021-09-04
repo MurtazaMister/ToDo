@@ -223,6 +223,30 @@ body{
     border:2px solid #977d75;
     border-radius: 15px;
 }
+.rup{
+    background-color: transparent;
+    border: 2px solid transparent;
+    height:35px;
+    width:35px;
+    font-size: 15px;
+}
+.rup:hover{
+    border:2px solid #0051ff;
+    border-radius: 15px;
+    
+}
+.rdown{
+    background-color: transparent;
+    border: 2px solid transparent;
+    height:35px;
+    width:35px;
+    font-size: 15px;
+}
+.rdown:hover{
+    border:2px solid #0051ff;
+    border-radius: 15px;
+
+}
 .rstar{
     height:35px;
     width:35px;

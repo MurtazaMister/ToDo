@@ -1,5 +1,40 @@
 //-----------------------------------------------------------------------------------------------------------\\
 
+
+function shiftup(element){
+    if(element.parentElement.parentElement.previousSibling!=null){
+        let a = element.parentElement.parentElement;
+        let b = element.parentElement.parentElement.previousSibling;
+        if(b.getElementsByClassName('rstar')[0].style.backgroundColor == a.getElementsByClassName('rstar')[0].style.backgroundColor){
+            let col1 = a.getElementsByClassName('rcolor')[0].value;
+            let col2 = b.getElementsByClassName('rcolor')[0].value;
+            let z = a.innerHTML;
+            a.innerHTML = b.innerHTML;
+            b.innerHTML = z;
+            a.getElementsByClassName('rcolor')[0].value = col2;
+            b.getElementsByClassName('rcolor')[0].value = col1;
+        }
+    }
+}
+function shiftdown(element){
+    if(element.parentElement.parentElement.nextSibling!=null){
+        let a = element.parentElement.parentElement;
+        let b = element.parentElement.parentElement.nextSibling;
+        if(b.getElementsByClassName('rstar')[0].style.backgroundColor == a.getElementsByClassName('rstar')[0].style.backgroundColor){
+            let col1 = a.getElementsByClassName('rcolor')[0].value;
+            let col2 = b.getElementsByClassName('rcolor')[0].value;
+            let z = a.innerHTML;
+            a.innerHTML = b.innerHTML;
+            b.innerHTML = z;
+            a.getElementsByClassName('rcolor')[0].value = col2;
+            b.getElementsByClassName('rcolor')[0].value = col1;
+        }
+    }
+}
+
+
+//-----------------------------------------------------------------------------------------------------------\\
+
 function sorter(element, order){
     let list = document.querySelector('#main');
     if(list.childElementCount > 1){
@@ -27,7 +62,7 @@ function sortText(order){
                 b.getElementsByClassName('rstar')[0].style.backgroundColor = 'transparent';
                 let col1 = a.getElementsByClassName('rcolor')[0].value;
                 let col2 = b.getElementsByClassName('rcolor')[0].value;
-                if(a.getElementsByClassName('rtask')[0].value>b.getElementsByClassName('rtask')[0].value){
+                if(a.getElementsByClassName('rcheck')[0].checked==false && b.getElementsByClassName('rcheck')[0].checked==false && a.getElementsByClassName('rtask')[0].value>b.getElementsByClassName('rtask')[0].value){
                     let z = a.innerHTML;
                     a.innerHTML = b.innerHTML;
                     b.innerHTML =  z;
@@ -46,7 +81,7 @@ function sortText(order){
                     b.getElementsByClassName('rstar')[0].style.backgroundColor === 'transparent';
                     let col1 = a.getElementsByClassName('rcolor')[0].value;
                     let col2 = b.getElementsByClassName('rcolor')[0].value;
-                    if(a.getElementsByClassName('rtask')[0].value<b.getElementsByClassName('rtask')[0].value){
+                    if(a.getElementsByClassName('rcheck')[0].checked==false && b.getElementsByClassName('rcheck')[0].checked==false && a.getElementsByClassName('rtask')[0].value<b.getElementsByClassName('rtask')[0].value){
                         let z = a.innerHTML;
                         a.innerHTML = b.innerHTML;
                         b.innerHTML =  z;
@@ -69,7 +104,7 @@ function sortColours(order){
                 b.getElementsByClassName('rstar')[0].style.backgroundColor = 'transparent';
                 let col1 = a.getElementsByClassName('rcolor')[0].value;
                 let col2 = b.getElementsByClassName('rcolor')[0].value;
-                if(col1=='None' || col1>col2){
+                if((a.getElementsByClassName('rcheck')[0].checked==false && b.getElementsByClassName('rcheck')[0].checked==false) && (col1=='None' || (col1!='None' && col2!='None' && col1>col2))){
                     let z = a.innerHTML;
                     a.innerHTML = b.innerHTML;
                     b.innerHTML =  z;
@@ -88,7 +123,7 @@ function sortColours(order){
                     b.getElementsByClassName('rstar')[0].style.backgroundColor === 'transparent';
                     let col1 = a.getElementsByClassName('rcolor')[0].value;
                     let col2 = b.getElementsByClassName('rcolor')[0].value;
-                    if(col1=='None' || col1<col2){
+                    if((a.getElementsByClassName('rcheck')[0].checked==false && b.getElementsByClassName('rcheck')[0].checked==false) && (col1=='None' || (col1!='None' && col2!='None' && col1<col2))){
                         let z = a.innerHTML;
                         a.innerHTML = b.innerHTML;
                         b.innerHTML =  z;
@@ -124,7 +159,6 @@ function ddaattee(a,b){
 }
 
 function sortDate(order){
-    console.log('hi');
     let list = document.querySelector('#main');
     let c = list.childElementCount;
     if(order=='asc'){
@@ -137,14 +171,14 @@ function sortDate(order){
                 let decide = ddaattee(a.getElementsByClassName('rdate')[0].value,b.getElementsByClassName('rdate')[0].value);
                 let col1 = a.getElementsByClassName('rcolor')[0].value;
                 let col2 = b.getElementsByClassName('rcolor')[0].value;
-                if(decide == 1){
+                if(a.getElementsByClassName('rcheck')[0].checked==false && b.getElementsByClassName('rcheck')[0].checked==false && decide == 1){
                     let z = a.innerHTML;
                     a.innerHTML = b.innerHTML;
                     b.innerHTML =  z;
                     a.getElementsByClassName('rcolor')[0].value = col2;
                         b.getElementsByClassName('rcolor')[0].value = col1;
                 }
-                else if(decide == 2){
+                else if(a.getElementsByClassName('rcheck')[0].checked==false && b.getElementsByClassName('rcheck')[0].checked==false && decide == 2){
                     let z = a.innerHTML;
                     a.innerHTML = b.innerHTML;
                     b.innerHTML =  z;
@@ -164,14 +198,14 @@ function sortDate(order){
                     let decide = ddaattee(a.getElementsByClassName('rdate')[0].value,b.getElementsByClassName('rdate')[0].value);
                     let col1 = a.getElementsByClassName('rcolor')[0].value;
                     let col2 = b.getElementsByClassName('rcolor')[0].value;
-                    if(decide == 1){
+                    if(a.getElementsByClassName('rcheck')[0].checked==false && b.getElementsByClassName('rcheck')[0].checked==false && decide == 1){
                         let z = a.innerHTML;
                         a.innerHTML = b.innerHTML;
                         b.innerHTML =  z;
                         a.getElementsByClassName('rcolor')[0].value = col2;
                         b.getElementsByClassName('rcolor')[0].value = col1;
                     }
-                    else if(decide==-2){
+                    else if(a.getElementsByClassName('rcheck')[0].checked==false && b.getElementsByClassName('rcheck')[0].checked==false && decide==-2){
                         let z = a.innerHTML;
                         a.innerHTML = b.innerHTML;
                         b.innerHTML =  z;
@@ -207,6 +241,8 @@ function createRow(count,k){
                 <option class="options" value="Purple">🟣</option>
                 <option class="options" value="Red">🔴</option>
             </select></td>
+            <td class="up" style="width:40px;"><input type="button" value="🔼" class="rup elements" onclick="shiftup(this)"></td>
+            <td class="down" style="width:40px;"><input type="button" value="🔽" class="rdown elements" onclick="shiftdown(this)"></td>
             <td class="del" style="width:40px;"><input type="button" value="❌" class="rdel elements" onclick="del(this)"></td>
             ` ;
     return newobj;
@@ -485,6 +521,8 @@ function checkk(checkbox){
         document.getElementsByClassName(parentName)[0].getElementsByClassName('redit')[0].disabled =true;
         document.getElementsByClassName(parentName)[0].getElementsByClassName('rstar')[0].disabled =true;
         document.getElementsByClassName(parentName)[0].getElementsByClassName('rcolor')[0].disabled =true;
+        document.getElementsByClassName(parentName)[0].getElementsByClassName('rup')[0].disabled =true;
+        document.getElementsByClassName(parentName)[0].getElementsByClassName('rdown')[0].disabled =true;
         document.getElementsByClassName(parentName)[0].getElementsByClassName('rstar')[0].style.backgroundColor ='transparent';
         document.getElementsByClassName(parentName)[0].getElementsByClassName('rtask')[0].style.textDecoration = 'line-through';
         list.appendChild(document.getElementsByClassName(parentName)[0]);
@@ -498,6 +536,8 @@ function checkk(checkbox){
         checkbox.parentElement.parentElement.getElementsByClassName('redit')[0].disabled = false;
         checkbox.parentElement.parentElement.getElementsByClassName('rcolor')[0].disabled = false;
         checkbox.parentElement.parentElement.getElementsByClassName('rstar')[0].disabled = false;
+        checkbox.parentElement.parentElement.getElementsByClassName('rup')[0].disabled = false;
+        checkbox.parentElement.parentElement.getElementsByClassName('rdown')[0].disabled = false;
         list.insertBefore(checkbox.parentElement.parentElement,document.getElementsByTagName('tr')[y+1]);
     }
 }

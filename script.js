@@ -241,6 +241,7 @@ function createRow(count,k){
             <td class="down" style="width:40px;"><input type="button" value="🔽" class="rdown elements" onclick="shiftdown(this)"></td>
             <td class="del" style="width:40px;"><input type="button" value="❌" class="rdel elements" onclick="del(this)"></td>
             ` ;
+            newobj.getElementsByClassName('rstar')[0].style.backgroundColor = 'transparent';
     return newobj;
 }
 
@@ -557,7 +558,7 @@ function star(starbtn){
         else{
             list.insertBefore(starbtn.parentElement.parentElement,list.childNodes[y]);
         }
-        starbtn.style.backgroundColor = "transparent";
+        starbtn.style.backgroundColor = 'transparent';
     }
 }
 

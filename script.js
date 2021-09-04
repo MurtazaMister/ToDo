@@ -1,6 +1,4 @@
 //-----------------------------------------------------------------------------------------------------------\\
-
-
 function shiftup(element){
     if(element.parentElement.parentElement.previousSibling!=null){
         let a = element.parentElement.parentElement;
@@ -31,8 +29,6 @@ function shiftdown(element){
         }
     }
 }
-
-
 //-----------------------------------------------------------------------------------------------------------\\
 
 function sorter(element, order){

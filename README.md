@@ -15,7 +15,7 @@ And many other features include:
     -Striking out completed tasks
     -Prioritising tasks
     -Sorting according to:
-      *Colours
-      *Deadlines
+     *Colours
+     *Deadlines
     
 and many more...

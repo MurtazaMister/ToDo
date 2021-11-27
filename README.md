@@ -3,11 +3,11 @@
 Complete your tasks on the go using ToDo list Mark 2.0
 
 Now why is it 2.0?
-Try adding multiple tasks using a semicolon ';'
-  for example -> Walk the dog; Buy vegetables; Attend a seminar
+Try adding multiple tasks using a semicolon ';'<br>
+  &nbsp;&nbsp;for example -> Walk the dog; Buy vegetables; Attend a seminar
   
-Try prefixing multiple tasks using a colon ':'
-  for example -> Learn : HTML; CSS; Javascript
+Try prefixing multiple tasks using a colon ':'<br>
+  &nbsp;&nbsp;for example -> Learn : HTML; CSS; Javascript
 
 And many other features include:
 
